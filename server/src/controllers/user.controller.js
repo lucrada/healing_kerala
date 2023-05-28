@@ -36,15 +36,15 @@ export const registerController = async (req, res) => {
     }
     const hashed_password = await bcrypt.hash(user.password, 10);
     if (await addUser(user, hashed_password)) {
-        const token = createAdminToken(await getUser(username))
-        res.cookie("user-access-token", access_token, {
+        const token = createUserToken(await getUser(username))
+        res.cookie("user-access-token", token, {
             maxAge: daysToMilliSeconds(3),
             httpOnly: true,
         })
-        responseMessage(res, 200, 'ADMIN_REG_SUCCESS');
+        responseMessage(res, 200, 'USER_REG_SUCCESS');
         return;
     }
-    responseMessage(res, 500, 'ADMIN_REG_FAILED');
+    responseMessage(res, 500, 'USER_REG_FAILED');
 }
 
 export const deleteController = async (req, res) => {
