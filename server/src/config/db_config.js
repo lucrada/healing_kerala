@@ -10,5 +10,6 @@ export const getModels = async () => {
     await _connect()
     return {
         User: schemas.userModel(),
+        Admin: schemas.adminModel(),
     }
 }

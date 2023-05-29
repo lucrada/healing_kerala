@@ -15,7 +15,7 @@ export const schemas = {
         return mongoose.model('User', userSchema);
     },
 
-    AdminModel: () => {
+    adminModel: () => {
         const adminSchema = mongoose.Schema({
             first_name: String,
             second_name: String,

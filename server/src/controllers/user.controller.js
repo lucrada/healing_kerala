@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const { verify } = require('jsonwebtoken');
 const { daysToMilliSeconds, responseMessage } = require('../utils/util');
+const { usernameExists, validateUser, createUserToken, getUser, addUser, removeUser, getUserData } = require('../services/user.service');
 
 export const loginController = async (req, res) => {
     if (req.authenticated) {
@@ -16,7 +17,12 @@ export const loginController = async (req, res) => {
         responseMessage(res, 500, 'INCORRECT_PASSWORD');
         return;
     }
-    const token = createUserToken(await getUser(credentials.username));
+    const user = await getUser(credentials.username);
+    if (user == null) {
+        responseMessage(res, 500, 'LOGIN_FAILED');
+        return;
+    }
+    const token = createUserToken(user);
     res.cookie("user-access-token", token, {
         maxAge: daysToMilliSeconds(3),
         httpOnly: true,
@@ -61,13 +67,27 @@ export const deleteController = async (req, res) => {
     responseMessage(res, 500, 'USER_REMOVAL_FAILED');
 }
 
-export const dataController = async (req, res) => {
+export const getIdController = (req, res) => {
     if (!req.authenticated) {
         responseMessage(res, 500, 'NOT_AUTHENTICATED');
         return
     }
-    const decoded_token = verify(req.cookies["user-access-token"], process.env.SECRET_KEY)
-    responseMessage(res, 200, { id: decoded_token.id });
+    const decoded_token = verify(req.cookies["user-access-token"], process.env.SECRET_KEY);
+    responseMessage(res, 200, decoded_token.id);
+}
+
+export const userDataController = async (req, res) => {
+    if (!req.authenticated) {
+        responseMessage(res, 500, 'NOT_AUTHENTICATED');
+        return;
+    }
+    const decoded_token = verify(req.cookies["user-access-token"], process.env.SECRET_KEY);
+    const userData = await getUserData(decoded_token.id);
+    if (userData == null) {
+        responseMessage(res, 500, 'USER_FETCH_FAILED');
+        return;
+    }
+    responseMessage(res, 200, userData);
 }
 
 export const logoutController = async (req, res) => {
