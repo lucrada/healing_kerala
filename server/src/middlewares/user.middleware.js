@@ -1,6 +1,6 @@
 const { verify } = require('jsonwebtoken')
 
-const validateAdminToken = (req, _, next) => {
+const validateUserToken = (req, _, next) => {
     if (!req.cookies) {
         req.authenticated = false
         return next()
@@ -23,4 +23,4 @@ const validateAdminToken = (req, _, next) => {
     }
 }
 
-module.exports = { validateAdminToken }
+module.exports = { validateUserToken }

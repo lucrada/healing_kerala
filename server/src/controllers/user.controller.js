@@ -3,7 +3,7 @@ const { verify } = require('jsonwebtoken');
 const { daysToMilliSeconds, responseMessage } = require('../utils/util');
 const { usernameExists, validateUser, createUserToken, getUser, addUser, removeUser, getUserData } = require('../services/user.service');
 
-export const loginController = async (req, res) => {
+const loginController = async (req, res) => {
     if (req.authenticated) {
         responseMessage(res, 500, 'ALREADY_LOGGED_IN');
         return;
@@ -30,19 +30,19 @@ export const loginController = async (req, res) => {
     responseMessage(res, 200, 'LOGGED_IN');
 }
 
-export const registerController = async (req, res) => {
+const registerController = async (req, res) => {
     if (req.authenticated) {
         responseMessage(res, 500, 'ALREADY_LOGGED_IN');
         return;
     }
-    const user = req.user;
+    const user = req.body.user;
     if (await usernameExists(user.username)) {
         responseMessage(res, 500, 'USERNAME_ALREADY_EXISTS');
         return;
     }
     const hashed_password = await bcrypt.hash(user.password, 10);
     if (await addUser(user, hashed_password)) {
-        const token = createUserToken(await getUser(username))
+        const token = createUserToken(await getUser(user.username))
         res.cookie("user-access-token", token, {
             maxAge: daysToMilliSeconds(3),
             httpOnly: true,
@@ -53,7 +53,7 @@ export const registerController = async (req, res) => {
     responseMessage(res, 500, 'USER_REG_FAILED');
 }
 
-export const deleteController = async (req, res) => {
+const deleteController = async (req, res) => {
     if (!req.authenticated) {
         responseMessage(res, 500, 'NOT_AUTHENTICATED');
         return
@@ -67,7 +67,7 @@ export const deleteController = async (req, res) => {
     responseMessage(res, 500, 'USER_REMOVAL_FAILED');
 }
 
-export const getIdController = (req, res) => {
+const getIdController = (req, res) => {
     if (!req.authenticated) {
         responseMessage(res, 500, 'NOT_AUTHENTICATED');
         return
@@ -76,7 +76,7 @@ export const getIdController = (req, res) => {
     responseMessage(res, 200, decoded_token.id);
 }
 
-export const userDataController = async (req, res) => {
+const userDataController = async (req, res) => {
     if (!req.authenticated) {
         responseMessage(res, 500, 'NOT_AUTHENTICATED');
         return;
@@ -90,7 +90,7 @@ export const userDataController = async (req, res) => {
     responseMessage(res, 200, userData);
 }
 
-export const logoutController = async (req, res) => {
+const logoutController = async (req, res) => {
     if (!req.authenticated) {
         responseMessage(res, 500, 'ALREADY_LOGGED_OUT');
         return
@@ -99,6 +99,16 @@ export const logoutController = async (req, res) => {
     responseMessage(res, 200, 'LOGGED_OUT');
 }
 
-export const authStatusController = (req, res) => {
+const authStatusController = (req, res) => {
     responseMessage(res, 200, req.authenticated ? 'LOGGED_IN' : 'LOGGED_OUT');
 }
+
+module.exports = {
+    loginController,
+    registerController,
+    deleteController,
+    getIdController,
+    userDataController,
+    logoutController,
+    authStatusController,
+};

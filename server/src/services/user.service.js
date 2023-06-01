@@ -1,4 +1,6 @@
 const { getModels } = require('../config/db_config');
+const { sign } = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 let models = null;
 (async () => {
@@ -7,7 +9,7 @@ let models = null;
     })();
 })();
 
-export const usernameExists = async (username) => {
+const usernameExists = async (username) => {
     try {
         let count = await models.User.countDocuments({ username });
         return count > 0;
@@ -17,12 +19,12 @@ export const usernameExists = async (username) => {
     }
 }
 
-export const validateUser = async (credentials) => {
+const validateUser = async (credentials) => {
     if (!await usernameExists(credentials.username)) {
         return false;
     }
     try {
-        const password = (await models.User.findOne({ username })).password;
+        const password = (await models.User.findOne({ username: credentials.username })).password;
         const result = await bcrypt.compare(credentials.password, password);
         return result;
     } catch (err) {
@@ -31,7 +33,7 @@ export const validateUser = async (credentials) => {
     }
 }
 
-export const getUser = async (username) => {
+const getUser = async (username) => {
     try {
         const user = await models.User.findOne({ username }, '_id username');
         if (user) {
@@ -48,7 +50,7 @@ export const getUser = async (username) => {
     }
 }
 
-export const createUserToken = (user) => {
+const createUserToken = (user) => {
     const access_token = sign(
         user,
         process.env.SECRET_KEY
@@ -56,7 +58,7 @@ export const createUserToken = (user) => {
     return access_token;
 }
 
-export const addUser = async (user, hashedPassword) => {
+const addUser = async (user, hashedPassword) => {
     user.password = hashedPassword;
     const newUser = new models.User(user);
     try {
@@ -68,7 +70,7 @@ export const addUser = async (user, hashedPassword) => {
     }
 }
 
-export const removeUser = async (id) => {
+const removeUser = async (id) => {
     try {
         const removedUser = await models.User.findByIdAndRemove(id);
         if (removedUser) {
@@ -82,7 +84,7 @@ export const removeUser = async (id) => {
     }
 }
 
-export const getUserData = async (id) => {
+const getUserData = async (id) => {
     try {
         const user = await models.User.findOne({ _id: id }).select('-password');
         if (user) {
@@ -95,3 +97,13 @@ export const getUserData = async (id) => {
         return null;
     }
 }
+
+module.exports = {
+    usernameExists,
+    validateUser,
+    getUser,
+    createUserToken,
+    addUser,
+    removeUser,
+    getUserData,
+};
