@@ -2,16 +2,21 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const { userModel, adminModel } = require('./schema')
 
-const _connect = async () => {
+const connected = false;
+const connect = async () => {
     await mongoose.connect(process.env.MONGODB_URI || `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
+    connected = true;
 }
 
 const getModels = async () => {
-    await _connect()
-    return {
-        User: userModel(),
-        Admin: adminModel(),
+    if (connected) {
+        return {
+            User: userModel(),
+            Admin: adminModel(),
+        }
     }
+    console.log('Not connected to database');
+    return null;
 }
 
-module.exports = { getModels };
+module.exports = { getModels, connect };

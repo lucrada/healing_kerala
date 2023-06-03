@@ -1,15 +1,17 @@
-const { loginController, authStatusController, registerController, deleteController, logoutController, userDataController } = require('../controllers/user.controller');
 const { validateUserToken } = require('../middlewares/user.middleware');
-
+const routes = require('../config/route_config');
 const router = require('express').Router();
+const getAuthController = require('../utils/auth_controller_factory');
 
-router.get('/', validateUserToken, userDataController);
-router.get('/isLoggedIn', validateUserToken, authStatusController);
+const controller = getAuthController(routes.USER_ROUTE);
 
-router.post('/login', validateUserToken, loginController);
-router.post('/register', validateUserToken, registerController);
-router.post('/logout', validateUserToken, logoutController);
+router.get('/', validateUserToken, controller.memberDataController);
+router.get('/isLoggedIn', validateUserToken, controller.authStatusController);
 
-router.delete('/delete', validateUserToken, deleteController);
+router.post('/login', validateUserToken, controller.loginController);
+router.post('/register', validateUserToken, controller.registerController);
+router.post('/logout', validateUserToken, controller.logoutController);
+
+router.delete('/delete', validateUserToken, controller.deleteController);
 
 module.exports = router;
