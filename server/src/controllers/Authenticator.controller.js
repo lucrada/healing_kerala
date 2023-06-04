@@ -1,11 +1,12 @@
 const { daysToMilliSeconds, responseMessage } = require('../utils/util');
 const bcrypt = require('bcrypt');
+const { verify } = require('jsonwebtoken');
 
 class Authenticator {
     constructor(token_type, service, token_duration) {
-        self.token_type = token_type;
-        self.service = service;
-        self.token_duration = token_duration;
+        this.token_type = token_type;
+        this.service = service;
+        this.token_duration = token_duration;
     }
 
     loginController = async (req, res) => {
@@ -14,22 +15,22 @@ class Authenticator {
             return;
         }
         const credentials = req.body.credentials;
-        if (!await service.usernameExists(credentials.username)) {
+        if (!await this.service.usernameExists(credentials.username)) {
             responseMessage(res, 500, 'USERNAME_DOES_NOT_EXIST');
             return;
         }
-        if (!await service.validateCredential(credentials)) {
+        if (!await this.service.validateCredential(credentials)) {
             responseMessage(res, 500, 'INCORRECT_PASSWORD');
             return;
         }
-        const member = await service.getMember(credentials.username);
+        const member = await this.service.getMember(credentials.username);
         if (member == null) {
             responseMessage(res, 500, 'LOGIN_FAILED');
             return;
         }
-        const token = createMemberToken(member);
-        res.cookie(token_type, token, {
-            maxAge: daysToMilliSeconds(token_duration),
+        const token = this.service.createMemberToken(member);
+        res.cookie(this.token_type, token, {
+            maxAge: daysToMilliSeconds(this.token_duration),
             httpOnly: true,
         });
         responseMessage(res, 200, 'LOGGED_IN');
@@ -41,15 +42,15 @@ class Authenticator {
             return;
         }
         const member = req.body.member;
-        if (await service.usernameExists(member.username)) {
+        if (await this.service.usernameExists(member.username)) {
             responseMessage(res, 500, 'USERNAME_ALREADY_EXISTS');
             return;
         }
         const hashed_password = await bcrypt.hash(member.password, 10);
-        if (await service.addMember(member, hashed_password)) {
-            const token = service.createMemberToken(await service.getMember(member.username));
-            res.cookie(token_type, token, {
-                maxAge: daysToMilliSeconds(token_duration),
+        if (await this.service.addMember(member, hashed_password)) {
+            const token = this.service.createMemberToken(await this.service.getMember(member.username));
+            res.cookie(this.token_type, token, {
+                maxAge: daysToMilliSeconds(this.token_duration),
                 httpOnly: true,
             })
             responseMessage(res, 200, 'REG_SUCCESS');
@@ -63,9 +64,9 @@ class Authenticator {
             responseMessage(res, 500, 'NOT_AUTHENTICATED');
             return
         }
-        const decoded_token = verify(req.cookies[token_type], process.env.SECRET_KEY);
-        if (await service.removeMember(decoded_token.id)) {
-            res.clearCookie(token_type);
+        const decoded_token = verify(req.cookies[this.token_type], process.env.SECRET_KEY);
+        if (await this.service.removeMember(decoded_token.id)) {
+            res.clearCookie(this.token_type);
             responseMessage(res, 200, 'REMOVED_SUCCESSFULLY');
             return
         }
@@ -77,7 +78,7 @@ class Authenticator {
             responseMessage(res, 500, 'NOT_AUTHENTICATED');
             return
         }
-        const decoded_token = verify(req.cookies[token_type], process.env.SECRET_KEY);
+        const decoded_token = verify(req.cookies[this.token_type], process.env.SECRET_KEY);
         responseMessage(res, 200, decoded_token.id);
     }
 
@@ -86,8 +87,8 @@ class Authenticator {
             responseMessage(res, 500, 'NOT_AUTHENTICATED');
             return;
         }
-        const decoded_token = verify(req.cookies[token_type], process.env.SECRET_KEY);
-        const memberData = await service.getMemberData(decoded_token.id);
+        const decoded_token = verify(req.cookies[this.token_type], process.env.SECRET_KEY);
+        const memberData = await this.service.getMemberData(decoded_token.id);
         if (memberData == null) {
             responseMessage(res, 500, 'FETCHING_FAILED');
             return;
@@ -100,7 +101,7 @@ class Authenticator {
             responseMessage(res, 500, 'ALREADY_LOGGED_OUT');
             return
         }
-        res.clearCookie(token_type);
+        res.clearCookie(this.token_type);
         responseMessage(res, 200, 'LOGGED_OUT');
     }
 

@@ -1,10 +1,11 @@
 const routes = require('../config/route_config');
-const UserAuthService = require('../controllers/UserAuth.service');
+const UserAuthService = require('../services/UserAuth.service');
 
-const getServiceController = (route) => {
+const getService = (route) => {
     if (route === routes.USER_ROUTE) {
         return new UserAuthService();
     }
+    return null;
 }
 
-module.exports = getServiceController;
+module.exports = getService;

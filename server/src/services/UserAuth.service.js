@@ -3,8 +3,8 @@ const { getModels } = require('../config/db_config');
 
 class UserAuthService extends AuthService {
     constructor() {
-        const model = getModels.User;
-        super(model);
+        const models = getModels();
+        super(models.User);
     }
 }
 
