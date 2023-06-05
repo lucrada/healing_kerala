@@ -1,0 +1,53 @@
+///////////////////////////////////////////
+//VARIABLES
+//////////////////////////////////////////
+
+
+$primary-white: #F8F6F4;
+$primary-blue:#2DCDDF;
+$primary-blue-dark:#79E0EE;
+$Grey-light-2: #f4f2f2;
+$Grey-light-4: #ccc;
+$primary-black:#000;
+$water-blue:#0e87cc;
+$green-yellow:greenyellow;
+$pink--1:#DB005B;
+$userbgcolor-3:#F9D949;
+$userbgcolor-4:#832DDF;
+$popupbgcolor:#2DCDDF;
+
+
+
+
+
+
+
+///////////////////////////////////////////
+//BASIC RESET
+//////////////////////////////////////////
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,*::before,*::after
+{
+    box-sizing: inherit;
+}
+
+html {
+   
+    box-sizing: border-box;
+    font-size: 62.5%;// 1rem = 10px
+ 
+}
+
+
+body {
+    font-family: 'Open sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: black;
+    background-color: $primary-white;
+  
+}

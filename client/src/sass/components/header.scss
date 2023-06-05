@@ -1,0 +1,130 @@
+.header{
+  margin-left: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $primary-blue;
+    color: white;
+   
+}
+
+.logo
+{
+    display: flex;
+    align-items: center;
+   padding: 2rem;    
+    &__img{
+    height: 5rem;
+    width:5rem;
+    border-radius: 50%;
+    }
+
+    &__text
+    {
+        font-size: 3rem;
+        padding: 0 1rem;
+    }
+}
+
+.search
+{
+    flex:0 0 30%;
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__input
+    {
+        width: 80%;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 10rem;
+        background-color: $Grey-light-2;
+        margin-right: -3.5rem;
+        transition: all 0.2s ease-in; 
+
+        &::-webkit-input-placeholder
+        {
+            color: $Grey-light-4;
+            font-weight:400;
+        }
+
+        &:focus
+        {
+            outline: none;
+            width: 100%;
+        }
+    }
+
+    &__btn
+    {
+        border: none;
+        background-color: $Grey-light-2;
+        cursor: pointer;
+        transition: all 0.2s ease-in;
+        &:hover
+        {
+            transform: translateY(-1px);
+        }
+        &:active
+        {
+            transform: translateY(5px);
+        }
+    }
+
+    &__icon
+    {
+        width: 2rem;
+        height: 2rem;
+        fill:  $Grey-light-4;
+    }
+}
+
+.user-nav{
+    &>*
+    {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+       justify-content: space-around;
+       flex: 0 0 48%;
+      
+    }
+    flex: 0 0 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    &__btn
+    {
+        border: none;
+        cursor: pointer;
+        padding: 1rem 3.2rem;
+      
+        border-radius: 10rem;
+        transition: background-color 0.4s ease-in,transform 0.2s ease-out;
+
+        &:hover
+        {
+            background-color: black;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        &:active
+        {
+            transform: translateY(0.3rem);
+        }
+    }
+
+    &__icon
+    {
+        height: 2rem;
+        width: 2rem;
+        fill: $primary-blue;
+        &:hover
+        {
+            fill: white;
+        }
+    }
+}
