@@ -1,0 +1,245 @@
+
+.container
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    background-color: $primary-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+   
+  
+    &>*
+    {
+        margin-bottom: 3rem;
+    }
+}
+
+.opened
+{
+    animation: fadein 1s cubic-bezier(.81,.36,0,1.44);
+}
+
+
+.closed
+{
+    animation: fadeout 0.2s cubic-bezier(.81,.36,0,1.44);
+    visibility: hidden;
+}
+
+.heading
+{
+    &__text
+    {   
+    
+       color: $primary-white;
+       font-size: 5rem;
+       font-weight: 600;
+    }
+}
+
+.paragraph
+{
+    color: $primary-white;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.close
+{
+    position: absolute;
+    top:3rem;
+    right: 4rem;
+    background: transparent;
+    border: none;
+    height: 5rem;
+    width: 5rem;
+    transition: transform 0.1s ease-in;
+       
+
+    &:active
+    {
+        transform: translateY(0.5rem);
+    }
+
+    &:hover::before
+    {
+        color: $primary-blue;
+    }
+
+    &::before
+    {
+     content: "x";
+     color: $primary-white;
+     font-size: 4rem;
+     position: absolute;
+     top: 0;
+     left: 1.5rem;
+    
+    }
+
+   
+
+
+
+    &__btn
+    {
+       width: 100%;
+       height: 100%;
+       fill: $primary-white;
+  
+               
+
+       
+    }
+
+    &:hover &__btn
+    {
+        
+        fill: $primary-blue;
+       
+    }
+}
+
+
+
+.popup
+{
+   
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+
+
+   
+
+   
+   
+    &__circle
+    {
+        height: 20rem;
+        width: 20rem;
+        margin-right: 3rem;
+        border-radius: 50%;
+      
+        border: 5px solid $primary-blue;
+        position: relative;
+        
+        overflow: hidden;
+
+        &--1
+        {
+            background-color: $pink--1;
+        }
+
+        
+        &--2
+        {
+           
+            background-color:$green-yellow;
+        }
+
+        
+        &--3
+        {
+           
+            background-color:$userbgcolor-3;
+        }
+
+        &--4
+        {
+           
+            background-color:$userbgcolor-4;
+        }
+
+
+
+       &--1::before,&--2::before,&--3::before,&--4::before
+       {
+          content: "USER";
+          z-index: 10;
+          display: flex;
+          justify-content: center;
+          align-items: end;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding: 2rem;
+          color:  $primary-blue;
+          font-size: 1.6rem;
+       }
+       
+       &--2::before
+       {
+        content: "ADMIN";
+       }
+
+       &--3::before
+       {
+        content: "DOCTOR";
+       }
+
+       &--4::before
+       {
+        content: "FLIGHT";
+       }
+
+
+       
+       
+        &__icon
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            height: 8rem;
+            width: 8rem;
+            z-index: 10;
+            fill: $primary-blue;
+            cursor: pointer;
+            transition: transform 0.1s ease-in;
+
+            &:active
+            {
+                transform: translate(-50%,-45%);
+            }
+            
+            
+
+            &--2
+            {
+                height: 12rem;
+                width: 12rem;
+            }
+        }
+
+        &::after
+        {
+            content: "";
+            position: absolute;
+            top: 0;
+            left:0;
+            height: 100%;
+            width: 100%;
+            background: #fff;
+            border-radius: 30%;
+           
+
+        }
+        &:hover::after
+        {
+            animation: flow 5s ease-in-out, flowinfinite 1s 5s infinite;
+            
+        }
+    }
+}

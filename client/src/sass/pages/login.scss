@@ -1,0 +1,160 @@
+.login-container
+{
+   height: 100vh;
+   width: 100vw;
+   background-image: linear-gradient(to right bottom,$primary-blue,$primary-blue-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;   
+}
+
+.login-icon
+{
+    position: absolute;
+    left: 2.5rem;
+    top: 2.5rem;
+    height: 6rem;
+    width: 6rem;
+    fill: $primary-white;
+    transition: all 0.2s ease-in; 
+
+    &:hover
+    {
+        fill: $green-yellow;
+        transform: translateY(-2px);
+    }
+
+    &:active
+    {
+        transform: translateY(0.3rem);
+    }
+
+
+}
+
+.login-heading
+{
+    text-transform: uppercase;
+    color: $primary-white;
+    font-size: 5rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.login{
+    background-color: $primary-blue-dark;
+    width: 30vw;
+    flex: 0 0 75%;
+    padding: 5rem;
+    box-shadow: 4px 11px 14px 4px rgba(0,0,0,0.1);
+    &__form
+    {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    }
+
+    &__label
+    {
+        text-transform: uppercase;
+        color: $primary-blue;
+        font-size: 5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    &__input
+    {
+        border: none;
+        padding: 1rem 2rem;
+        width: 85%;
+        height: 4.5rem;
+        outline: none;
+        border-radius: 2rem;
+        margin-bottom: 5rem;
+        transition: all 0.2s ease-in; 
+        
+        &::-webkit-input-placeholder
+        {
+            color: $Grey-light-4;
+            font-weight:400;
+        }
+
+        &:focus
+        {
+            
+            width: 100%;
+        }
+    }
+    
+    
+
+    &__submit
+    {
+        border: none;
+        cursor: pointer;
+        padding: 1rem 3.2rem;
+        margin-top: 3rem;
+        width: 50%;
+        border-radius: 2rem;
+        transition: background-color 0.4s ease-in,transform 0.2s ease-out;
+
+        &:hover
+        {
+            background-color: black;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        &:active
+        {
+            transform: translateY(0.3rem);
+        }
+
+
+    }
+
+    
+
+
+    
+   // align-self: stretch;
+    // margin: 1000rem;
+}
+.signup
+{
+    width: 50vw;
+
+    &__label
+    {
+        font-size: 2rem;
+        }
+    
+    
+    &__input
+    {
+        margin-bottom: 2rem;
+        width: 70%;
+    
+    }    
+    
+    &__form
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+         flex-wrap: wrap;
+    }
+
+    &__block
+    {
+        flex: 0 0 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
