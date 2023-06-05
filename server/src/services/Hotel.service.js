@@ -1,11 +1,11 @@
 const AuthService = require("./Authenticator.service");
 const { getModels } = require('../config/db_config');
 
-class UserAuthService extends AuthService {
+class HotelService extends AuthService {
     constructor() {
         const models = getModels();
-        super(models.User);
+        super(models.Hotel);
     }
 }
 
-module.exports = UserAuthService;
+module.exports = HotelService;

@@ -3,8 +3,8 @@ const router = require('express').Router();
 const getController = require('../utils/controller_factory');
 const getTokenValidator = require('../utils/token_validator.factory');
 
-const controller = getController(routes.USER_ROUTE);
-const tokenValidator = getTokenValidator(routes.USER_ROUTE);
+const controller = getController(routes.HOTEL_ROUTE);
+const tokenValidator = getTokenValidator(routes.HOTEL_ROUTE);
 
 router.get('/', tokenValidator.validateToken, controller.memberDataController);
 router.get('/isLoggedIn', tokenValidator.validateToken, controller.authStatusController);

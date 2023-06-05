@@ -7,5 +7,9 @@ router.get("/", (_, res) => {
 });
 
 router.use(routes.USER_ROUTE, require("./user.route"));
+router.use(routes.HOTEL_ROUTE, require("./hotel.route"));
+router.use(routes.DOCTOR_ROUTE, require("./doctor.route"));
+router.use(routes.TAXI_ROUTE, require("./taxi.route"));
+router.use(routes.ADMIN_ROUTE, require("./admin.route"));
 
 module.exports = router;

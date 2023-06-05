@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const userModel = () => {
-    const userSchema = mongoose.Schema({
+const schemas = {
+    USER: {
         first_name: String,
         last_name: String,
         username: String,
@@ -10,19 +10,41 @@ const userModel = () => {
         phone: String,
         gender: String,
         country: String,
-    });
-    return mongoose.model('User', userSchema);
-};
-
-const adminModel = () => {
-    const adminSchema = mongoose.Schema({
+    },
+    ADMIN: {
         first_name: String,
-        second_name: String,
+        last_name: String,
         username: String,
         email: String,
         password: String,
-    });
-    return mongoose.model('Admin', adminSchema);
+    },
+    DOCTOR: {
+        first_name: String,
+        last_name: String,
+        username: String,
+        email: String,
+        password: String,
+    },
+    TAXI: {
+        first_name: String,
+        last_name: String,
+        username: String,
+        email: String,
+        password: String,
+    },
+    HOTEL: {
+        first_name: String,
+        last_name: String,
+        username: String,
+        email: String,
+        password: String,
+    },
 };
 
-module.exports = { userModel, adminModel };
+const userModel = mongoose.model('User', mongoose.Schema(schemas.USER));
+const adminModel = mongoose.model('Admin', mongoose.Schema(schemas.ADMIN));
+const hotelModel = mongoose.model('Hotel', mongoose.Schema(schemas.HOTEL));
+const taxiModel = mongoose.model('Taxi', mongoose.Schema(schemas.TAXI));
+const doctorModel = mongoose.model('Doctor', mongoose.Schema(schemas.DOCTOR));
+
+module.exports = { schemas, userModel, adminModel, hotelModel, taxiModel, doctorModel };
