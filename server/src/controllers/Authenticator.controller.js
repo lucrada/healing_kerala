@@ -32,6 +32,8 @@ class Authenticator {
         res.cookie(this.token_type, token, {
             maxAge: daysToMilliSeconds(this.token_duration),
             httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
         });
         responseMessage(res, 200, 'LOGGED_IN');
     }
@@ -52,6 +54,8 @@ class Authenticator {
             res.cookie(this.token_type, token, {
                 maxAge: daysToMilliSeconds(this.token_duration),
                 httpOnly: true,
+                secure: true,
+                sameSite: 'strict',
             })
             responseMessage(res, 200, 'REG_SUCCESS');
             return;
