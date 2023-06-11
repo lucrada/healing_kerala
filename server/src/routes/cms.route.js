@@ -3,7 +3,7 @@ const router = express.Router();
 const routes = require('../config/route_config');
 
 router.get("/", (_, res) => {
-    res.send("CMS");
+    res.send("Content Management System");
 });
 
 router.use(routes.USER_ROUTE, require("./user.route"));
