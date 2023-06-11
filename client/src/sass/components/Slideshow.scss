@@ -1,0 +1,35 @@
+.scontainer
+{
+    width: 90vw;
+    height: 60vh;
+    background-color: greenyellow;
+    align-self: center;
+   // overflow: hidden;  
+
+    //  &__slider
+    // {
+    //     width: 500%;
+    //     height: 100%;
+
+    //     display: flex;
+    //     justify-content: flex-start;
+    //     transition: all 0.2s;
+    //     // animation: sliding 3s steps(3) infinite;
+        
+           
+    // }
+
+    &__slides
+    {
+        width: 90vw;
+    height: 60vh;
+
+           
+    }
+
+    &__img
+    {
+       height: 100%;
+       width: 100%;
+    }
+}

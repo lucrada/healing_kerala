@@ -1,0 +1,63 @@
+@import '../base.scss';
+
+.Ucontainer
+{
+    height: 15vh;
+    width: 70vw;
+    background-color: $primary-white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 57%;
+    box-shadow: 0px 15px 19px 0px rgba(0,0,0,0.1);
+
+    
+
+}
+
+.list
+{
+    text-decoration: none;
+    display: flex;
+    justify-content: space-around;
+    &__item
+    {
+      list-style: none;
+       height: 7rem;
+       width:7rem;
+       border-radius: 50%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       font-size: 1.2rem;
+       box-shadow: 0px 15px 19px 0px rgba(0,0,0,0.1);
+       cursor: pointer;
+       transition: all 0.5s ease-out;
+
+       &:active
+       {
+           transform: translateY(1rem);
+       }
+    }
+
+   
+
+    &__icon
+    {
+        height: 4rem;
+        width: 4rem;
+        fill: $Neon-green;
+      
+        transition: all 0.5s ease-out;
+        &:hover
+        {
+           fill: $primary-blue;
+        }
+
+        
+       
+    }
+}
