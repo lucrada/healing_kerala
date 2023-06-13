@@ -1,0 +1,60 @@
+.Dheader
+{
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $primary-blue;
+    height: 5rem;
+    width: 100vw;
+
+    &__text
+    {
+        font-size: 2rem;
+        margin-left: 1rem;
+        font-weight: 500;
+        color: $primary-white;
+    }
+    &__img
+    {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    &__btn
+    {
+        border: none;
+        cursor: pointer;
+        padding: 1rem 3rem;
+        
+        border-radius: 10rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        transition: background-color 0.4s ease-in,transform 0.2s ease-out;
+
+        &:hover
+        {
+            background-color: black;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        &:active
+        {
+            transform: translateY(0.3rem);
+        }
+    }
+
+    &__icon
+    {
+        height: 1.5rem;
+        width: 2rem;
+        fill: $primary-blue;
+        &:hover
+        {
+            fill: white;
+        }
+    }
+
+}

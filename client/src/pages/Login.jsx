@@ -1,8 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-const Login = () => {
-  let navigation = useNavigate();
 
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
+
+
+
+
+const Login = () => {
+  
+
+    let navigation = useNavigate();
+    let location = useLocation();
+    let curpath = location.pathname;
+    let { id } = useParams();
+    console.log(`parameter: ${id}`);
+ 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +32,7 @@ const Login = () => {
       });
       let data = await response.json();
       if (data.message === 'LOGGED_IN') {
-        // redirect to dashboard
+        navigation(`${curpath}/dashboard`);
       }
     } catch (err) {
       console.log(err);
@@ -29,7 +42,7 @@ const Login = () => {
   const formHandler = async (e) => {
     e.preventDefault();
     if (await logIn()) {
-      //redirect to dashboard
+      navigation(`${curpath}/dashboard`);
       console.log('logged in');
     } else {
       console.log('logged out');
@@ -74,7 +87,7 @@ const Login = () => {
             <label class="login__label" htmlFor="password">Password</label>
             <input value={password} onChange={(e) => { setPassword(e.target.value); }} class="login__input" type="password" name='password' placeholder='Password' required />
 
-            <button class="login__submit" type='submit'>Submit</button>
+            <button class="login__submit" type='submit' >Submit</button>
           </form>
 
         </div>

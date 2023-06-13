@@ -100,4 +100,30 @@
         transform:translate(-50%,-50%) scale(0);
         visibility: hidden;
     }
+
+
+    
 }
+
+@keyframes sliding
+     {
+
+        0%
+        {
+          margin-left: 0%;
+        }
+
+        50%
+        {
+            margin-left: -106%;
+
+        }
+
+
+        100%
+        {
+            margin-left: -200%;
+        }
+
+        
+    }

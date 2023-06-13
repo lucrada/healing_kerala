@@ -87,6 +87,7 @@ const Signup = () => {
 
   return (
     <div>
+      
       <div className="login-container">
         <svg className="login-icon" onClick={() => { navigation("/") }} >
           <use href="./assets/images/symbol-defs4.svg#icon-home"></use>
