@@ -45,6 +45,7 @@ const Login = () => {
       navigation(`${curpath}/dashboard`);
       console.log('logged in');
     } else {
+      alert("Invalid credentials");
       console.log('logged out');
     }
   }
@@ -76,7 +77,7 @@ const Login = () => {
     <div>
       <div className="login-container">
         <svg className="login-icon" onClick={() => { navigation("/") }} >
-          <use href="./assets/images/symbol-defs4.svg#icon-home"></use>
+          <use href="/assets/images/symbol-defs4.svg#icon-home"></use>
         </svg>
         <h1 className="login-heading">WELCOME TO THE LOGIN PAGE</h1>
         <div className="login">
