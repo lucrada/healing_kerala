@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-const Signup = () => {
+import { useParams } from 'react-router-dom';
+import { getApiUrlFromRoute } from '../API';
 
+const Signup = () => {
   let navigation = useNavigate();
+  let { id } = useParams();
+  console.log(id);
 
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
@@ -15,10 +19,10 @@ const Signup = () => {
 
   useEffect(() => {
     checkAuthentication();
-  }, []);
+  });
 
   const checkAuthentication = async () => {
-    const api_url = 'http://localhost:3000/cms/user/isLoggedIn';
+    const api_url = getApiUrlFromRoute(`${id.toLowerCase()}/isLoggedIn`);
     try {
       const response = await fetch(api_url, {
         method: 'GET',
@@ -26,25 +30,22 @@ const Signup = () => {
       });
       let data = await response.json();
       if (data.message === 'LOGGED_IN') {
-        console.log('signed up');
+        navigation(`/login/${id}/dashboard`);
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (_) { }
   };
 
   const formHandler = async (e) => {
     e.preventDefault();
     if (await signUp()) {
-      //redirect to dashboard
-      console.log('signed up');
+      navigation(`/login/${id}/dashboard`);
     } else {
-      console.log('logged out');
+      alert('unable to sign up');
     }
   }
 
   const signUp = async () => {
-    const api_url = 'http://localhost:3000/cms/user/register';
+    const api_url = getApiUrlFromRoute(`${id.toLowerCase()}/register`);
     const body = {
       member: {
         first_name,
@@ -68,7 +69,7 @@ const Signup = () => {
       });
       const data = await response.json();
       console.log(data);
-      if (data.message === 'LOGGED_IN') {
+      if (data.message === 'REG_SUCCESS') {
         return true;
       }
       return false;
@@ -78,19 +79,12 @@ const Signup = () => {
     }
   }
 
-  // check currently logged in
-  // if yes redirect to dashboard
-
-  // sign up api call and redirect to dashboard
-
-  // validation
-
   return (
     <div>
-      
+
       <div className="login-container">
         <svg className="login-icon" onClick={() => { navigation("/") }} >
-          <use href="./assets/images/symbol-defs4.svg#icon-home"></use>
+          <use href="/assets/images/symbol-defs4.svg#icon-home"></use>
         </svg>
         <h1 className="login-heading">WELCOME TO THE SIGNUP PAGE</h1>
         <div className="login signup">
