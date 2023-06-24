@@ -61,7 +61,7 @@ const Landing = () => {
             <ul className="lowerview__list">
               <li className="lowerview__items"><a href="#" className="lowerview__links">ABHIJITH</a></li>
               <li className="lowerview__items"><a href="#" className="lowerview__links">ABHIJITH</a></li>
-              <li className="lowerview__items"><a href="#" className="lowerview__links">ABHIJITH</a></li>
+              <li className="lowerview__items"><a href="#" className="lowerview__links">JOYAL</a></li>
               <li className="lowerview__items"><a href="#" className="lowerview__links">ABHIJITH</a></li>
             </ul>
             <div className="lowerview__logo">
