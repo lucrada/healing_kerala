@@ -12,10 +12,10 @@ const Dheader = (props) => {
         <span className="Dheader__text">Healing Kerala</span>
       </div>
 
-      <button className= "Dheader__btn" onClick={()=>{navigation("/login/User/dashboard")}}>DASHBOARD
+      {props.showbutton && <button className= "Dheader__btn" onClick={()=>{navigation("/login/User/dashboard")}}>DASHBOARD
        <svg className="Dheader__icon" >
             <use href="/assets/images/symbol-defs.svg#icon-key"></use>
-          </svg></button>
+          </svg></button>}
     
        <button className= "Dheader__btn" onClick={()=>{navigation("/")}}>Logout
        <svg className="Dheader__icon" >

@@ -1,0 +1,27 @@
+@import "../base.scss";
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    width: 20rem;
+    height: 4.7rem;
+    border-radius: 4rem;
+    background-color: $primary-blue;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background-color: $primary-black;
+      transform: scale(1.1);
+    }
+  
+    &:active {
+      background-color: #999;
+      transform: scale(0.9);
+    }
+  }
+  
