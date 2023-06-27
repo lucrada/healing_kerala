@@ -46,7 +46,7 @@ picture:"3"
        
   return (
     <div className='MContainer'>
-      <Dheader/>
+      <Dheader showbutton = "True"/>
       <h1 className='packageHeading'>{`${id} PACKAGES`} </h1>
       <div className="cardContainer">
       <Cards cancerdetails1 = {cancerdetails1} />

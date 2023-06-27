@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserDashboard from "./pages/UserDashboard";
 import MedicalPackage from "./pages/MedicalPackage";
+import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   return (
     <Router>
@@ -17,6 +18,8 @@ function App() {
         
         <Route path="/login/User/dashboard" element={<UserDashboard/>}></Route>
         <Route path="/login/User/dashboard/:id" element={<MedicalPackage/>}></Route>
+        <Route path="/login/Admin/dashboard" element={<AdminDashboard/>}></Route>
+
 
       </Routes>
     </Router>
