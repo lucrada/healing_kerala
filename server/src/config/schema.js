@@ -17,6 +17,9 @@ const schemas = {
         username: String,
         email: String,
         password: String,
+        phone: String,
+        gender: String,
+        country: String,
     },
     DOCTOR: {
         first_name: String,
@@ -24,6 +27,9 @@ const schemas = {
         username: String,
         email: String,
         password: String,
+        phone: String,
+        gender: String,
+        country: String,
     },
     TAXI: {
         first_name: String,
@@ -31,6 +37,9 @@ const schemas = {
         username: String,
         email: String,
         password: String,
+        phone: String,
+        gender: String,
+        country: String,
     },
     HOTEL: {
         first_name: String,
@@ -38,6 +47,9 @@ const schemas = {
         username: String,
         email: String,
         password: String,
+        phone: String,
+        gender: String,
+        country: String,
     },
 };
 

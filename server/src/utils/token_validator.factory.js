@@ -3,7 +3,7 @@ const UserTokenValidator = require('../middlewares/UserTokenValidator.middleware
 const AdminTokenValidator = require('../middlewares/AdminTokenValidator.middleware');
 const HotelTokenValidator = require('../middlewares/HotelTokenValidator.middleware');
 const TaxiTokenValidator = require('../middlewares/TaxiTokenValidator.middleware');
-const DoctorTokenValidator = require('../middlewares/UserTokenValidator.middleware');
+const DoctorTokenValidator = require('../middlewares/DoctorTokenValidator.middleware');
 
 const getTokenValidator = (route) => {
     if (route === routes.USER_ROUTE) {
