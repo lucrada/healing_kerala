@@ -49,7 +49,7 @@ const MedicalPackage = () => {
 
   return (
     <div className='MContainer'>
-      <Dheader userType='User' />
+      <Dheader userType='User' showbutton="True" />
       <h1 className='packageHeading'>{`${id} PACKAGES`} </h1>
       <div className="cardContainer">
         <Cards cancerdetails1={cancerdetails1} />

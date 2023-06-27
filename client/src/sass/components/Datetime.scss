@@ -1,0 +1,19 @@
+@import"../base.scss";
+
+.date-time-component {
+    text-align: center;
+    background-color: $primary-blue;
+    
+  
+    .date-time-title {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+  
+    .date-time {
+      font-size: 10rem;
+      color: $primary-white;
+    }
+  }
+  

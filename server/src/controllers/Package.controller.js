@@ -1,5 +1,6 @@
-const getService = require('../utils/service_factory');
 const { responseMessage } = require('../utils/util');
+const getService = require('../utils/service_factory');
+const routes = require('../config/route_config');
 
 class PackageController {
     constructor() {
@@ -16,9 +17,9 @@ class PackageController {
         }
     }
 
-    getPackage = async (_, res, package) => {
+    getPackage = async (_, res, package_) => {
         try {
-            const packages = await this.services.fetchPackages(package);
+            const packages = await this.services.fetchPackages(package_);
             responseMessage(res, 200, packages);
         } catch (e) {
             console.log(e);
@@ -28,8 +29,8 @@ class PackageController {
 
     addPackage = async (req, res) => {
         try {
-            const package = req.body.package;
-            if (await this.service.addNewPackage(package)) {
+            const package_ = req.body.package;
+            if (await this.service.addNewPackage(package_)) {
                 responseMessage(res, 200, 'PACKAGE_ADDED');
                 return;
             }
@@ -55,4 +56,4 @@ class PackageController {
     }
 }
 
-module.exports = { PackageController }
+module.exports = PackageController;

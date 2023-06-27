@@ -1,0 +1,98 @@
+@import"../base.scss";
+
+
+
+.admin
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 2rem;
+    height: 25rem;
+    border-radius: 4px;
+    margin-top: 2rem;
+    box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    0 16px 32px rgba(0, 0, 0, 0.2);
+
+
+      background-color: $primary-blue-dark;
+
+  
+   &--heading
+   {
+    
+        font-size: 3.5rem;
+        font-weight: bold;
+        color: $primary-white;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+     
+        &:hover
+        {
+            animation: headingAnimation 3s ease-in-out infinite alternate;
+        }
+        
+      
+       
+    
+      
+   }
+
+
+    &--profile
+    {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+
+
+    &--avatar
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        & > *:not(:last-child) {
+            // Styles for all child elements except the last one
+            margin-bottom: 1rem;
+          }
+
+          &--photo
+          {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            border: solid 5px $primary-white;
+
+            &:hover
+            {
+                transform: scale(1.1);
+            }
+          }
+
+
+          &--name
+          {
+            font-size: 2rem;
+            color: $primary-white;
+            text-transform: uppercase;
+            font-weight: bold;
+          }
+    }
+
+
+}
+
+
+
+

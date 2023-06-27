@@ -22,7 +22,7 @@ const getController = (route) => {
     if (route === routes.HOTEL_ROUTE) {
         return new HotelController();
     }
-    if (route == routes.PACKAGE_ROUTE) {
+    if (route === routes.PACKAGE_ROUTE) {
         return new PackageController();
     }
     return null;

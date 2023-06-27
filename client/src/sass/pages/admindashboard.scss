@@ -1,0 +1,21 @@
+
+@import"../base.scss";
+
+.AContainer
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.admin--buttons
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2rem;
+  background-color: $primary-blue-dark;
+    height: 21rem;
+
+}

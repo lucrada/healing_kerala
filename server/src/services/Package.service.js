@@ -6,13 +6,13 @@ class PackageService {
         this.model = models.Package;
     }
 
-    fetchPackages = async (package) => {
+    fetchPackages = async (package_) => {
         try {
-            if (package === '*') {
+            if (package_ === '*') {
                 const packages = await this.model.find().toArray();
                 return packages;
             } else {
-                const packages = await this.model.find({ speciality: package }).toArray();
+                const packages = await this.model.find({ speciality: package_ }).toArray();
                 return packages;
             }
         } catch (e) {
@@ -21,9 +21,9 @@ class PackageService {
         }
     }
 
-    addNewPackage = async (package) => {
+    addNewPackage = async (package_) => {
         try {
-            const newPackage = new this.model(package);
+            const newPackage = new this.model(package_);
             await newPackage.save();
             return true;
         } catch (e) {
