@@ -4,6 +4,7 @@ const routes = {
     DOCTOR_ROUTE: '/doctor',
     TAXI_ROUTE: '/taxi',
     HOTEL_ROUTE: '/hotel',
+    PACKAGE_ROUTE: '/package',
 };
 
 module.exports = routes;

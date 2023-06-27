@@ -51,6 +51,17 @@ const schemas = {
         gender: String,
         country: String,
     },
+    PACKAGE: {
+        name: String,
+        speciality: String,
+        hospital: String,
+        duration: String,
+        hotel: String,
+        extra: String,
+        price: String,
+        backbg: String,
+        picture: String
+    },
 };
 
 const userModel = mongoose.model('User', mongoose.Schema(schemas.USER));
@@ -58,5 +69,6 @@ const adminModel = mongoose.model('Admin', mongoose.Schema(schemas.ADMIN));
 const hotelModel = mongoose.model('Hotel', mongoose.Schema(schemas.HOTEL));
 const taxiModel = mongoose.model('Taxi', mongoose.Schema(schemas.TAXI));
 const doctorModel = mongoose.model('Doctor', mongoose.Schema(schemas.DOCTOR));
+const packageModel = mongoose.model('Package', mongoose.Schema(schemas.PACKAGE));
 
-module.exports = { schemas, userModel, adminModel, hotelModel, taxiModel, doctorModel };
+module.exports = { schemas, userModel, adminModel, hotelModel, taxiModel, doctorModel, packageModel };
