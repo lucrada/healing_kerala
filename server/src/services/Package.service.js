@@ -5,6 +5,7 @@ class PackageService {
     constructor() {
         const models = getModels();
         this.model = models.Package;
+        this.bookingsModel = models.Bookings;
     }
 
     fetchPackages = async (package_) => {
@@ -16,6 +17,19 @@ class PackageService {
                 const packages = await this.model.find({ speciality: package_ });
                 return packages;
             }
+        } catch (e) {
+            console.log(e);
+            return [];
+        }
+    }
+
+    getPackagesWithUserId = async (id, type) => {
+        try {
+            const packages_ = await this.model.find({
+                _id: { $nin: await this.bookingsModel.distinct("packageId", { "userId": id }) },
+                speciality: type
+            });
+            return packages_;
         } catch (e) {
             console.log(e);
             return [];

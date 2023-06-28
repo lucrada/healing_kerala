@@ -62,6 +62,10 @@ const schemas = {
         backbg: String,
         picture: String
     },
+    BOOKINGS: {
+        userId: String,
+        packageId: String
+    }
 };
 
 const userModel = mongoose.model('User', mongoose.Schema(schemas.USER));
@@ -70,5 +74,6 @@ const hotelModel = mongoose.model('Hotel', mongoose.Schema(schemas.HOTEL));
 const taxiModel = mongoose.model('Taxi', mongoose.Schema(schemas.TAXI));
 const doctorModel = mongoose.model('Doctor', mongoose.Schema(schemas.DOCTOR));
 const packageModel = mongoose.model('Package', mongoose.Schema(schemas.PACKAGE));
+const bookingsModel = mongoose.model('Bookings', mongoose.Schema(schemas.BOOKINGS));
 
-module.exports = { schemas, userModel, adminModel, hotelModel, taxiModel, doctorModel, packageModel };
+module.exports = { schemas, userModel, adminModel, hotelModel, taxiModel, doctorModel, packageModel, bookingsModel };

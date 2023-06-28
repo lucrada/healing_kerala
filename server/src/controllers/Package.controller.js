@@ -1,6 +1,7 @@
 const { responseMessage } = require('../utils/util');
 const getService = require('../utils/service_factory');
 const routes = require('../config/route_config');
+const UserController = require('./User.controller');
 
 class PackageController {
     constructor() {
@@ -24,6 +25,22 @@ class PackageController {
         } catch (e) {
             console.log(e);
             responseMessage(res, 500, null);
+        }
+    }
+
+    getFilteredPackages = async (req, res) => {
+        try {
+            if (!req.authenticated) {
+                responseMessage(res, 500, 'NOT_AUTHENTICATED');
+                return;
+            }
+            let userController = new UserController();
+            const id = userController.getId(req, res);
+            const packages_ = await this.service.getPackagesWithUserId(id, req.body.type);
+            responseMessage(res, 200, packages_);
+        } catch (e) {
+            console.log(e);
+            responseMessage(res, 500, 'FAILED_TO_FETCH_PACKAGES');
         }
     }
 

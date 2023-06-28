@@ -1,50 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Dheader from '../components/common/Dheader';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import Cards from '../components/common/Cards';
+import { getApiUrlFromRoute } from '../API';
 import '../sass/pages/medicalpackage.scss';
 
 const MedicalPackage = () => {
-  let location = useLocation();
-  let curpath = location.pathname;
+  let navigation = useNavigate();
   let { id } = useParams();
-  let typeOfSurgery = id.toUpperCase();
-  let cancerdetails1 = {
-    name: "Angela Yu MBBS,MD ",
-    speciality: `SPECIALIST IN ${typeOfSurgery} SURGERY`,
-    hospital: "ASTER MIMS,KOZHIKODE",
-    duration: "DURATION 2 MONTHS",
-    hotel: "STAY IN MARRIOT HOTEL",
-    extra: "SAFE AND RELIABLE",
-    price: "$199",
-    backbg: "1",
-    picture: "1"
-  }
+  let type = id.toLowerCase();
 
-  let cancerdetails2 = {
-    name: "Angela Yu MBBS,MD ",
-    speciality: `SPECIALIST IN ${typeOfSurgery} SURGERY`,
-    hospital: "ASTER MIMS,KOZHIKODE",
-    duration: "DURATION 2 MONTHS",
-    hotel: "STAY IN MARRIOT HOTEL",
-    extra: "SAFE AND RELIABLE",
-    price: "$250",
-    backbg: "2",
-    picture: "2"
-  }
+  const [packages_, setPackages] = useState([]);
 
-  let cancerdetails3 = {
-    name: "Angela Yu MBBS,MD ",
-    speciality: `SPECIALIST IN ${typeOfSurgery} SURGERY`,
-    hospital: "ASTER MIMS,KOZHIKODE",
-    duration: "DURATION 2 MONTHS",
-    hotel: "STAY IN MARRIOT HOTEL",
-    extra: "SAFE AND RELIABLE",
-    price: "$450",
-    backbg: "3",
-    picture: "3"
+  useEffect(() => {
+    checkAuthenticationAndFetchPackages();
+  }, []);
+
+  const checkAuthenticationAndFetchPackages = async () => {
+    const api_url = getApiUrlFromRoute('user/isLoggedIn');
+    try {
+      const response = await fetch(api_url, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      let data = await response.json();
+      if (data.message !== 'LOGGED_IN') {
+        navigation('/login/User');
+      }
+      await fetchPackages();
+    } catch (_) { }
+  };
+
+  const fetchPackages = async () => {
+    const api_url = getApiUrlFromRoute('package/filtered-packages');
+    const body = { type };
+    try {
+      const response = await fetch(api_url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      let data = await response.json();
+      if (data.message === 'NOT_AUTHENTICATED') {
+        navigation('/login/User');
+        return;
+      }
+      if (data.message === 'FAILED_TO_FETCH_PACKAGES') {
+        alert('Failed to fetch the packages, check network connection');
+        return;
+      }
+      setPackages(data.message);
+    } catch (_) { }
   }
 
   return (
@@ -52,9 +61,11 @@ const MedicalPackage = () => {
       <Dheader userType='User' showbutton="True" />
       <h1 className='packageHeading'>{`${id} PACKAGES`} </h1>
       <div className="cardContainer">
-        <Cards cancerdetails1={cancerdetails1} />
-        <Cards cancerdetails1={cancerdetails2} />
-        <Cards cancerdetails1={cancerdetails3} />
+        {packages_.length === 0 ? (
+          <h1>No packages are available!</h1>
+        ) : (
+          packages_.map((pack) => <Cards key={pack.id} cancerdetails1={pack} />)
+        )}
       </div>
 
     </div>

@@ -86,6 +86,15 @@ class Authenticator {
         responseMessage(res, 200, decoded_token.id);
     }
 
+    getId = (req, res) => {
+        if (!req.authenticated) {
+            responseMessage(res, 500, 'NOT_AUTHENTICATED');
+            return
+        }
+        const decoded_token = verify(req.cookies[this.token_type], process.env.SECRET_KEY);
+        return decoded_token.id;
+    }
+
     memberDataController = async (req, res) => {
         if (!req.authenticated) {
             responseMessage(res, 500, 'NOT_AUTHENTICATED');
