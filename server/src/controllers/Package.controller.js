@@ -9,7 +9,7 @@ class PackageController {
 
     getAllPackages = async (_, res) => {
         try {
-            const packages = await this.services.fetchPackages('*');
+            const packages = await this.service.fetchPackages('*');
             responseMessage(res, 200, packages);
         } catch (e) {
             console.log(e);
@@ -19,7 +19,7 @@ class PackageController {
 
     getPackage = async (_, res, package_) => {
         try {
-            const packages = await this.services.fetchPackages(package_);
+            const packages = await this.service.fetchPackages(package_);
             responseMessage(res, 200, packages);
         } catch (e) {
             console.log(e);

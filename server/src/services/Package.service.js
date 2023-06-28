@@ -1,4 +1,5 @@
 const { getModels } = require('../config/db_config');
+const { ObjectId } = require('mongodb');
 
 class PackageService {
     constructor() {
@@ -9,10 +10,10 @@ class PackageService {
     fetchPackages = async (package_) => {
         try {
             if (package_ === '*') {
-                const packages = await this.model.find().toArray();
+                const packages = await this.model.find();
                 return packages;
             } else {
-                const packages = await this.model.find({ speciality: package_ }).toArray();
+                const packages = await this.model.find({ speciality: package_ });
                 return packages;
             }
         } catch (e) {
@@ -34,7 +35,8 @@ class PackageService {
 
     removePackageWithId = async (id) => {
         try {
-            const removedPackage = await this.model.findByIdAndRemove(id);
+            let objectId = new ObjectId(id);
+            const removedPackage = await this.model.findByIdAndRemove(objectId);
             if (removedPackage) {
                 return true;
             } else {

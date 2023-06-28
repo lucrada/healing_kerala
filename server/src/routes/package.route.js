@@ -10,9 +10,9 @@ router.get('/cardio', (req, res) => controller.getPackage(req, res, 'cardio'));
 router.get('/cancer', (req, res) => controller.getPackage(req, res, 'cancer'));
 router.get('/neuro', (req, res) => controller.getPackage(req, res, 'neuro'));
 router.get('/ayurved', (req, res) => controller.getPackage(req, res, 'ayurved'));
-router.get('/skin', () => controller.getPackage('skin'));
+router.get('/skin', (req, res) => controller.getPackage(req, res, 'skin'));
 
 router.post('/add', controller.addPackage);
-router.post('/remove', controller.removePackage);
+router.delete('/remove', controller.removePackage);
 
 module.exports = router;

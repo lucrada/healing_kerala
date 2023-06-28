@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const { userModel, adminModel, hotelModel, taxiModel, doctorModel } = require('./schema');
+const { userModel, adminModel, hotelModel, taxiModel, doctorModel, packageModel } = require('./schema');
 
 const connect = async () => {
     try {
@@ -18,6 +18,7 @@ const getModels = () => {
         Hotel: hotelModel,
         Taxi: taxiModel,
         Doctor: doctorModel,
+        Package: packageModel,
     }
 }
 
