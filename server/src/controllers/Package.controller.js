@@ -58,6 +58,26 @@ class PackageController {
         }
     }
 
+    addBooking = async (req, res) => {
+        try {
+            if (!req.authenticated) {
+                responseMessage(res, 500, 'NOT_AUTHENTICATED');
+                return;
+            }
+            let userController = new UserController();
+            const id = userController.getId(req, res);
+            const packageId = req.body.packageId;
+            if (await this.service.bookPackage(id, packageId)) {
+                responseMessage(res, 200, 'PACKAGE_BOOKED');
+                return;
+            }
+            responseMessage(res, 500, 'BOOKING_FAILED');
+        } catch (e) {
+            console.log(e);
+            responseMessage(res, 500, 'BOOKING_FAILED');
+        }
+    }
+
     removePackage = async (req, res) => {
         try {
             const packageId = req.body.packageId;

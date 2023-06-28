@@ -36,6 +36,17 @@ class PackageService {
         }
     }
 
+    bookPackage = async (id, packageId) => {
+        try {
+            const newBooking = new this.bookingsModel({ userId: id, packageId: packageId });
+            await newBooking.save();
+            return true;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+
     addNewPackage = async (package_) => {
         try {
             const newPackage = new this.model(package_);

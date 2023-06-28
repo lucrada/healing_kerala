@@ -14,7 +14,7 @@ router.get('/neuro', (req, res) => controller.getPackage(req, res, 'neuro'));
 router.get('/ayurved', (req, res) => controller.getPackage(req, res, 'ayurved'));
 router.get('/skin', (req, res) => controller.getPackage(req, res, 'skin'));
 
-// router.post('/book', tokenValidator.validateToken, controller.addBooking);
+router.post('/book', tokenValidator.validateToken, controller.addBooking);
 router.post('/filtered-packages', tokenValidator.validateToken, controller.getFilteredPackages);
 router.post('/add', controller.addPackage);
 router.delete('/remove', controller.removePackage);

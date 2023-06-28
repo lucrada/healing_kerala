@@ -56,15 +56,26 @@ const MedicalPackage = () => {
     } catch (_) { }
   }
 
+  const showPaymentWindow = () => {
+    document.getElementsByClassName('payment_window')[0].style.visibility = 'visible';
+  }
+
+  const hidePaymentWindow = () => {
+    document.getElementsByClassName('payment_window')[0].style.visibility = 'hidden';
+  }
+
   return (
     <div className='MContainer'>
+      <div className='payment_window'>
+        <button id='confirmButton' className='payment_window__confirm-btn'>Confirm</button>
+      </div>
       <Dheader userType='User' showbutton="True" />
       <h1 className='packageHeading'>{`${id} PACKAGES`} </h1>
       <div className="cardContainer">
         {packages_.length === 0 ? (
           <h1>No packages are available!</h1>
         ) : (
-          packages_.map((pack) => <Cards key={pack.id} cancerdetails1={pack} />)
+          packages_.map((pack) => <Cards key={pack._id} cancerdetails1={pack} showWindowFunctionCall={showPaymentWindow} hideWindowFunctionCall={hidePaymentWindow} />)
         )}
       </div>
 
