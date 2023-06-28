@@ -67,7 +67,7 @@ const MedicalPackage = () => {
   return (
     <div className='MContainer'>
       <div className='payment_window'>
-        <button id='confirmButton' className='payment_window__confirm-btn'>Confirm</button>
+        <button id='confirmButton' className='payment_window__confirm-btn'>Confirm Payment</button>
       </div>
       <Dheader userType='User' showbutton="True" />
       <h1 className='packageHeading'>{`${id} PACKAGES`} </h1>
